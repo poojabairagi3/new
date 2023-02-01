@@ -12,7 +12,7 @@
       <h1>Form</h1>
     </header>
 
-    <card  style="text-align: center;">
+    
       <form onSubmit="saveToLocalStorage(event)">
         <div style="font-size: large;">
             
@@ -29,17 +29,33 @@
     </div>
       </form>
       
-    </card>
+    <ul id="listofitems"></ul>
     <script >
         function saveToLocalStorage(event){
             event.preventDefault();
             var name=event.target.username.value;
             var email=event.target.emailId.value;
 
-            localStorage.setItem('name',name);
-            localStorage.setItem('email',email);
-           
-        }
+            // localStorage.setItem('name',name);
+            // localStorage.setItem('email',email);
+
+            var obj={
+                name:name,
+                email:email
+            }
+             
+            localStorage.setItem(obj.email,JSON.stringify(obj));
+        
+        showUserOnScreen(obj)    }    
+        function showUserOnScreen(obj){
+            var parentElement=document.getElementById('listofitems');
+            var childElement = document.createElement('li');
+            childElement.textContent=obj.name+ ' - ' +obj.email;
+            parentElement.appendChild(childElement);
+
+}
+
+
     </script>
 
 
